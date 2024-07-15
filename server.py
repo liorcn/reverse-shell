@@ -1,6 +1,7 @@
 import socket
 import sys
 from datetime import datetime
+from constants import *
 
 class Server:
     def __init__(self, host='', port=9999):
@@ -23,7 +24,7 @@ class Server:
         try:
             print(f"Binding socket to port: {self.port}")
             self.socket.bind((self.host, self.port))
-            self.socket.listen(5)  # backlog
+            self.socket.listen(MAX_QUEUED_CONNECTIONS)  # backlog
         except socket.error as e:
             print(f"Socket binding error: {e}\nRetrying...")
             self.bind_socket()
@@ -45,10 +46,10 @@ class Server:
 
     def handle_command(self, command, conn):
         """ execute the selected command """
-        if command == 'quit':
+        if command == QUIT:
             self.quit_program()
             return True
-        elif command == 'history':
+        elif command == HISTORY:
             self.display_history()
             return False
         if len(command.encode()) > 0:

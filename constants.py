@@ -1,0 +1,3 @@
+QUIT = "quit"
+HISTORY = "history"
+MAX_QUEUED_CONNECTIONS = 5
